@@ -1,0 +1,148 @@
+<html>
+<head>
+<link href="../css/bottombar.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="../css/loadding.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="../css/table.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="../css/tabs.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="../css/searchbox.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="../css/datepickr.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/datepickr.js"></script>
+<script src="../js/scripts.js"></script>
+<script src="../js/addphrase.js"></script>
+</head>
+
+<body>
+<div class="modal"></div>
+<ul id="tabs">
+    <li><a href="#" title="tab1">New Phrases</a></li>
+    <li><a href="#" title="tab2">Cloud History</a></li>
+    <li><a href="#" title="tab3">Cloud Search</a></li>
+</ul>
+<div style="margin:-25px 15px 0px 0px;" align="right">This extension is made by PhanNguyen - pcnguyen.info@gmail.com</div>
+<div id="content_tab">
+    <div id="tab1">
+        <div style="margin:10px 0px 0px 15px;" align="center"><b>List of new phrases</b></div>
+        <div id="site-bottom-bar" class="fixed-position">
+            <div id="site-bottom-bar-frame">
+                <div id="site-bottom-bar-content">
+                    <input type="password" id="code" placeholder="code"/>
+                    <a class="button gray" id="btndel">Delete</a>
+                    <a class="button blue" id="btncloudup">Cloud up</a>
+                </div>
+                <div id="site-bottom-bar-action">
+                    <a class="button green" id="btnaddrow">Add row</a>
+                    <a class="button green" id="btnprint">Print</a>
+                    <a href="#top" >Top</a>
+                    <a href="#bottom" id="bottom" >Bottom</a>
+                </div>
+            </div>
+        </div>
+        <div id="site-body-container">
+            <div id="site-body-content">
+                <div id="content">
+                    <table class="content" cellspacing="1">
+                        <thead id='theadSavedWordList'>
+                            <tr>
+                                <th width=3%>No</th>
+                                <th width=3%><label><input type="checkbox" name="checks"/></label></th>
+                                <th width=5%>Cloud?</th>
+                                <th width=18%>Phrase</th>
+                                <th width=19%>Category</th>
+                                <th width=22%>Vietnamese</th>
+                                <th width=22%>English</th>
+                                <th width=8%>Last modified</th>
+                            </tr>
+                        </thead>
+                        <tbody id='tbodySavedWordList'></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tab2">
+        <div style="margin:10px 0px 0px 15px;" align="center"><b>History list of cloud phrases</b></div>
+        <div id="site-bottom-bar1" class="fixed-position">
+            <div id="site-bottom-bar-frame1">
+
+                <div id="site-bottom-bar-content1">
+                    <input type="text" id="datepicker1" placeholder="Start date"/>
+                    <input type="text" id="datepicker2" placeholder="End date"/>
+                    <a class="button blue" id="btnshowhistory">Show</a>
+                    <input type="password" id="code1" placeholder="code"/>
+                </div>
+                <div id="site-bottom-bar-action1">
+                    <a class="button green" id="btnprint1">Print</a>
+                    <a href="#top" >Top</a>
+                    <a href="#bottom" id="bottom1" >Bottom</a>
+                </div>
+            </div>
+        </div>
+        <div id="site-body-container1">
+            <div id="site-body-content1">
+                    <table class="content" cellspacing="1">
+                        <thead id='theadHistoryList'>
+                        <tr>
+                            <th width=3%>No</th>
+                            <th width=3%><label><input type="checkbox" name="checks"/></label></th>
+                            <th width=20%>Phrase</th>
+                            <th width=20%>Category</th>
+                            <th width=23%>Vietnamese</th>
+                            <th width=23%>English</th>
+                            <th width=8%>Created on</th>
+                        </tr>
+                        </thead>
+                        <tbody id='tbodyHistoryList'></tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+    <div id="tab3">
+        <div style="margin:10px 0px 0px 15px;" align="center"><b>Search cloud phrases</b></div>
+        <div id="site-bottom-bar2" class="fixed-position">
+            <div id="site-bottom-bar-frame2">
+                <div id="site-bottom-bar-content2">
+                    <input class="search" type="text" id="input_search" placeholder="Input what you want to search for"/>
+                    <a class="button blue" id="btnsearch">Search</a>
+                    <input type="password" id="code2" placeholder="code">
+
+                    <ul class="sb_dropdown" style="display:none;">
+                        <li class="sb_filter">Filter your search</li>
+                        <li><input type="checkbox" id="chk1" value="1" checked/><label for="all"><strong>All</strong></label></li>
+                        <li><input type="checkbox" id="chk2" value="2" checked disabled/><label for="Phrase">Phrase</label></li>
+                        <li><input type="checkbox" id="chk3" value="3" checked disabled/><label for="Category">Category</label></li>
+                        <li><input type="checkbox" id="chk4" value="4" checked disabled/><label for="English">English meaning</label></li>
+                        <li><input type="checkbox" id="chk5" value="5" checked disabled/><label for="Vietnamese">Vietnamese meaning</label></li>
+                    </ul>
+
+                </div>
+                <div id="site-bottom-bar-action2">
+                    <a class="button green" id="btnprint2">Print</a>
+                    <a href="#top" >Top</a>
+                    <a href="#bottom" id="bottom2" >Bottom</a>
+                </div>
+            </div>
+        </div>
+        <div id="site-body-container2">
+            <div id="site-body-content2">
+                <table class="content" cellspacing="1">
+                    <thead id='theadSearchList'>
+                    <tr>
+                        <th width=3%>No</th>
+                        <th width=3%><label><input type="checkbox" name="checks"/></label></th>
+                        <th width=20%>Phrase</th>
+                        <th width=20%>Category</th>
+                        <th width=23%>Vietnamese</th>
+                        <th width=23%>English</th>
+                        <th width=8%>Created on</th>
+                    </tr>
+                    </thead>
+                    <tbody id='tbodySearchList'></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

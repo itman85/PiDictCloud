@@ -1,0 +1,32 @@
+{
+  "name" : "PiDict",
+  "version" : "2.0.5",
+  "manifest_version": 2,
+  "description" : "A popup dictionary for reading paper online. Copyright by Phan Nguyen. Email: pcnguyen.info@gmail.com",
+  "background": {
+        "scripts": ["js/background.js"]
+  },
+  "browser_action": {
+    "default_icon": "images/dicticon.png"
+  },
+  "permissions": [
+    "storage",
+	"contextMenus",
+	"tabs",
+    "http://www.google.com/jsapi",
+	"http://*/*"
+  ],
+  "content_scripts" : [
+    {
+      "matches" : [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js" : ["js/contentscript.js","js/popup.js"],
+	  "css": ["css/popup.css"]  
+    }
+  ],
+  "icons" : {
+     "128" : "images/dictexticon.png"
+  }
+}

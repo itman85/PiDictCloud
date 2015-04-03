@@ -1,0 +1,36 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 //EN">
+<html>
+<head>
+<title>PiDictCloud</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+</head>
+
+<body>
+	<a href="\">Back to main page.</a>
+	<form action="/deleteindex" method="post">
+						<fieldset>							
+								<label class="titleform" for="content">List of document id (conjuncted by ";")</label>
+								<br/>
+								<textarea cols="32" rows="7" name="docids_input" id="docids_input"></textarea>
+								<br/>
+								<br/>
+								<label class="titleform" for="email">Select type of index</label>
+								<br/>
+								<select name="type">
+									<option value="P"> Phrase </option>
+									<option value="C"> Category </option>
+									<option value="Q"> Question </option>
+								</select>
+								<br/>
+								<br/>
+								<label class="titleform" for="email">Code</label>
+								<br/>
+								<input  class ="txtinput" style="width:150px"  size="25" name="code" id="code" type="password">
+								<br/>
+								<br/>
+								<input class="txtsub" name="submit" id="submit" value="Submit" type="submit">							
+						</fieldset>
+					</form>
+</body>
+
+</html>

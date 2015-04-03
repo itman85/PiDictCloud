@@ -1,0 +1,48 @@
+#site-body-content, #site-body-content1,#site-body-content2 {
+    padding: 15px 15px 15px 15px ;
+}
+
+#site-bottom-bar,#site-bottom-bar1,#site-bottom-bar2 {
+    background-color: #E1DEFA ;
+    border-top: 1px solid #CCCCCC ;
+    bottom: 0px ;
+    font-family: verdana, arial ;
+    font-size: 11px ;
+    height: 50px ;
+    position: fixed ;
+    width: 100% ;
+    z-index: 1000 ;
+}
+
+#site-bottom-bar-frame,#site-bottom-bar-frame1,#site-bottom-bar-frame2 {
+    height: 50px ;
+    margin: 0px 10px 0px 10px ;
+    position: relative ;
+}
+
+#site-bottom-bar-content,#site-bottom-bar-content1,#site-bottom-bar-content2 {
+    position:absolute;/* absolute */
+    left:0%;top:25%;
+}
+#site-bottom-bar-action,#site-bottom-bar-action1 ,#site-bottom-bar-action2 {
+    position:absolute;/* absolute */
+    right:0%;top:25%;
+}
+
+#menu-root {
+    background-color: #E8E8E8 ;
+    border: 1px solid #D0D0D0 ;
+    color: #000000 ;
+    display: block ;
+    height: 35px ;
+    line-height: 35px ;
+    text-align: center ;
+    text-decoration: none ;
+    width: 105px ;
+}
+
+#menu-root:hover {
+    background-color: #666666 ;
+    border-color: #000000 ;
+    color: #FFFFFF ;
+}

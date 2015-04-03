@@ -1,0 +1,63 @@
+ body{
+	/* Setting default text color, background and a font stack */
+	font-size:13px;
+	background: #fff;
+	font-family:Arial, Helvetica, sans-serif;
+}
+.b, .c, .d, .e, .f, .g, .h, .k, .i{ display:none;}
+#body em{ font-style:normal; font-size:30px;}
+
+.buttons{
+	border-bottom:solid #d1c8b8 4px;
+	display:block;
+	padding:8px;
+	width:80px;
+	-moz-border-radius: 1em 4em 1em 4em;
+	border-radius: 1em 4em 1em 4em;
+	text-align:center;
+	margin:1px;
+	background:#B5B5B5;
+	text-decoration:none; 
+	color:#292929;
+	float:left;font-family:Georgia, "Times New Roman", Times, serif; font-size:14px
+}
+
+.buttonHover{background:#EBEBEB;border-bottom:solid #FAA000 4px;}
+
+a.buttons:hover{background:#EBEBEB;border-bottom:solid #7AB6FA 4px;}
+ 
+#wrap{
+	text-align:left;
+	overflow:hidden;
+	width:100%;
+	height:100%;
+}
+
+.boxpopup {
+	overflow: auto;
+    background-color: #ffffff;
+    color: #383838;
+    height: 150px;
+    left: 100%;
+    padding: 20px;
+    position: fixed;
+    right: 30%;
+    top: 25%;
+    width: 400px;
+    z-index: 101;
+	border:5px solid #888888;
+	border-radius:10px;
+	-moz-border-radius:10px;	
+}
+
+
+a.boxclose {
+    background: url(../img/cancel.png) repeat scroll left top transparent;
+    cursor: pointer;
+    float: left;
+    height: 26px;
+    left: -23px;
+    position: relative;
+    top: -23px;
+    width: 26px;
+}

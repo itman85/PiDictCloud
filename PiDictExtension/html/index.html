@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Simple Table</title>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/scripts.js"></script>
+
+
+<link href="../css/table.css" rel="stylesheet" type="text/css" media="screen"/>
+<style type="text/css">
+ 
+		
+		 
+		
+		 
+		#site-body-content {
+		padding: 15px 15px 15px 15px ;
+		}
+		 
+		#site-bottom-bar {
+		background-color: #E1DEFA ;
+		border-top: 1px solid #CCCCCC ;
+		bottom: 0px ;
+		font-family: verdana, arial ;
+		font-size: 11px ;
+		height: 50px ;
+		position: fixed ;
+		width: 100% ;
+		z-index: 1000 ;
+		}
+		 
+		#site-bottom-bar-frame {
+		height: 50px ;
+		margin: 0px 10px 0px 10px ;
+		position: relative ;
+		}
+		 
+		#site-bottom-bar-content {
+		position:absolute;/* absolute */
+		left:0%;top:25%;
+		}
+		#site-bottom-bar-action {
+		position:absolute;/* absolute */
+		right:0%;top:25%;
+		}
+		 
+		#menu-root {
+		background-color: #E8E8E8 ;
+		border: 1px solid #D0D0D0 ;
+		color: #000000 ;
+		display: block ;
+		height: 35px ;
+		line-height: 35px ;
+		text-align: center ;
+		text-decoration: none ;
+		width: 105px ;
+		}
+		 
+		#menu-root:hover {
+		background-color: #666666 ;
+		border-color: #000000 ;
+		color: #FFFFFF ;
+		}
+		 
+		
+		 
+		
+		 
+		
+ 
+</style>
+</head>
+<body>
+<div id="site-bottom-bar" class="fixed-position">
+<div id="site-bottom-bar-frame">
+
+<div id="site-bottom-bar-content">
+<b>Search word:</b><input type="text"/>
+<a href="javascript:void(0)" class="button gray">Search</a>
+
+</div>
+<div id="site-bottom-bar-action">
+
+<a href="javascript:void(0)" class="button blue">Check Cloud</a>
+<a href="javascript:void(0)" class="button green">Print</a>
+<a href="#top" >Top</a>
+    <a href="#bottom" >Top</a>
+</div>
+</div>
+</div>
+<div id="site-body-container">
+<div id="site-body-content"> 
+	
+	<div id="content">
+    <table class="content" cellspacing="1">
+    <tr>
+	<th width=3%>No</th>
+	<th width=10%><label><input type="checkbox" name="checks" id="firstchk"/>Cloud Status</label></th>
+	<th width=7%><label><input type="checkbox" name="checks"/>Print</label></th>
+	<th width=20%>Phrase</th>
+	<th width=10%>Category</th>
+	<th width=25%>Vietnamese</th>
+	<th width=25%>English</th>
+	</tr>
+    <tr>
+	<td>0</td>
+	<td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+	<td><label><input type="checkbox" name="checks"/></label></td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	</tr>
+    
+	<tr><td>1</td>
+	<td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+	<td><label><input type="checkbox" name="checks"/></label></td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	</tr>
+	
+    <tr><td>2</td>
+	<td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+	<td><label><input type="checkbox" name="checks"/></label></td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	</tr>
+	
+    <tr><td>3</td>
+	<td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+	<td><label><input type="checkbox" name="checks"/></label></td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	</tr>
+    
+	<tr><td>4</td>
+	<td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+	<td><label><input type="checkbox" name="checks"/></label></td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	</tr>
+    <tr><td>5</td>
+	<td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+	<td><label><input type="checkbox" name="checks"/></label></td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	</tr>
+	<tr><td>6</td>
+	<td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+	<td><label><input type="checkbox" name="checks"/></label></td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	</tr>
+	<tr><td>7</td>
+	<td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+	<td><label><input type="checkbox" name="checks"/></label></td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	</tr>
+	<tr><td>8</td>
+	<td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+	<td><label><input type="checkbox" name="checks"/></label></td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	</tr>
+	<tr><td>9</td>
+	<td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+	<td><label><input type="checkbox" name="checks"/></label></td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	</tr>
+	<tr><td>10</td>
+	<td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+	<td><label><input type="checkbox" name="checks"/></label></td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	</tr><tr><td>11</td>
+	<td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+	<td><label><input type="checkbox" name="checks"/></label></td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	</tr>
+	<tr><td>12</td>
+	<td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+	<td><label><input type="checkbox" name="checks"/></label></td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	</tr>
+	<tr><td>13</td>
+	<td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+	<td><label><input type="checkbox" name="checks"/></label></td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	</tr>
+	<tr><td>14</td>
+	<td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+	<td><label><input type="checkbox" name="checks"/></label></td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	</tr>
+	<tr><td>15</td>
+	<td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+	<td><label><input type="checkbox" name="checks"/></label></td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	</tr>
+	<tr><td>16</td>
+	<td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+	<td><label><input type="checkbox" name="checks"/></label></td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	</tr>
+	<tr><td>17</td>
+	<td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+	<td><label><input type="checkbox" name="checks"/></label></td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	<td>hehehehehe</td>
+	<td>hahahahahha</td>
+	</tr>
+        <tr><td>18</td>
+            <td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+            <td><label><input type="checkbox" name="checks"/></label></td>
+            <td>hehehehehe</td>
+            <td>hahahahahha</td>
+            <td>hehehehehe</td>
+            <td>hahahahahha</td>
+        </tr>
+        <tr><td>19</td>
+            <td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+            <td><label><input type="checkbox" name="checks"/></label></td>
+            <td>hehehehehe</td>
+            <td>hahahahahha</td>
+            <td>hehehehehe</td>
+            <td>hahahahahha</td>
+        </tr>
+        <tr><td>20</td>
+            <td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+            <td><label><input type="checkbox" name="checks"/></label></td>
+            <td>hehehehehe</td>
+            <td>hahahahahha</td>
+            <td>hehehehehe</td>
+            <td>hahahahahha</td>
+        </tr>
+        <tr><td>21</td>
+            <td><label><input type="checkbox" name="checks"/>Lorem</label></td>
+            <td><label><input type="checkbox" name="checks"/></label></td>
+            <td>hehehehehe</td>
+            <td>hahahahahha</td>
+            <td>hehehehehe</td>
+            <td>hahahahahha</td>
+        </tr>
+	</table>
+
+	</div>
+	
+	</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,1047 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 //EN">
+<html>
+<head>
+<title>PiDictCloud</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link href="/static/css/tab.css" type="text/css" rel="stylesheet" />
+<link href="/static/css/searchbox.css" type="text/css" rel="stylesheet" media="screen" />
+<link href="/static/css/formstyle.css" type="text/css" rel="stylesheet" media="screen" />
+<link href="/static/css/jquery.ui.lib.css" type="text/css" rel="stylesheet" media="screen">
+<link href="/static/css/jquery.ui.theme.css" type="text/css" rel="stylesheet" media="screen">
+<link href="/static/css/loading.css" type="text/css" rel="stylesheet" media="screen" />
+<script src="/static/js/jquery-1.6.2.js"></script> 
+<script src="/static/js/jquery.ui.core.js"></script> 
+<script src="/static/js/jquery.ui.widget.js"></script> 
+<script src="/static/js/jquery.ui.datepicker.js"></script> 
+<script src="/static/js/canvasjs.min.js"></script> 
+<script type="text/javascript" src="/static/js/util.js"></script>
+<script type="text/javascript" src="/static/js/columnchart.js"></script>
+ <style type="text/css">
+        body { font-family:Arial, Helvetica, Sans-Serif; font-size:0.8em;background:#DBDBDB repeat;}
+        #result { border-collapse:collapse;margin:0;padding:0;position: absolute;top:140px;left:40px;}
+        #result h4 { margin:0px; padding:0px;}
+        #result img { float:right;}
+        #result ul { margin:10px 0 10px 40px; padding:0px;}
+        #result th { background:#A1A1A1 ; color:#FCFCFC; padding:7px 15px; text-align:left;}
+        #result td { background:#EBF3FA none repeat-x scroll center left; color:#000; padding:7px 15px; }
+        #result tr.odd:not(:last-child):hover td{background:#ADD4FF;}
+        #result tr.odd td { background:#E3E3E3 repeat-x scroll center left; cursor:pointer;border-bottom:solid #C2C2C2 1px;}
+        #result tr:last-child td{background:#DBDBDB;cursor:auto;border-bottom:none;}
+		#result div.arrow { background:transparent url(static/img/arrows.png) no-repeat scroll 0px -16px; width:16px; height:16px; display:block;}
+        #result div.up { background-position:0px 0px;}
+		
+		#resultW { border-collapse:collapse;margin:0;padding:0;position: absolute;top:140px;left:40px;}
+        #resultW h4 { margin:0px; padding:0px;}
+        #resultW img { float:right;}
+        #resultW ul { margin:10px 0 10px 40px; padding:0px;}
+        #resultW th { background:#A1A1A1 ; color:#FCFCFC; padding:7px 15px; text-align:left;}
+        #resultW td { background:#EBF3FA none repeat-x scroll center left; color:#000; padding:7px 15px; }
+        #resultW tr.odd:not(:last-child):hover td{background:#ADD4FF;}
+        #resultW tr.odd td { background:#E3E3E3 repeat-x scroll center left; cursor:pointer;border-bottom:solid #C2C2C2 1px;}
+		#resultW tr:last-child td{background:#DBDBDB;cursor:auto;border-bottom:none;}
+        #resultW div.arrow { background:transparent url(static/img/arrows.png) no-repeat scroll 0px -16px; width:16px; height:16px; display:block;}
+        #resultW div.up { background-position:0px 0px;}       
+		
+		#resultQ { border-collapse:collapse;margin:0;padding:0;position: absolute;top:140px;left:40px;}
+        #resultQ h4 { margin:0px; padding:0px;}
+        #resultQ img { float:right;}
+        #resultQ ul { margin:10px 0 10px 40px; padding:0px;}
+        #resultQ th { background:#A1A1A1 ; color:#FCFCFC; padding:7px 15px; text-align:left;}
+        #resultQ td { background:#EBF3FA none repeat-x scroll center left; color:#000; padding:7px 15px; }
+        #resultQ tr.odd:not(:last-child):hover td{background:#ADD4FF;}
+        #resultQ tr.odd td { background:#E3E3E3 repeat-x scroll center left; cursor:pointer;border-bottom:solid #C2C2C2 1px;}
+        #resultQ tr:last-child td{background:#DBDBDB;cursor:auto;border-bottom:none;}
+		#resultQ div.arrow { background:transparent url(static/img/arrows.png) no-repeat scroll 0px -16px; width:16px; height:16px; display:block;}
+        #resultQ div.up { background-position:0px 0px;}  
+        
+		#result2 { border-collapse:collapse;margin:0;padding:0;position: absolute;top:140px;left:40px;}
+        #result2 h4 { margin:0px; padding:0px;}
+        #result2 img { float:right;}
+        #result2 ul { margin:10px 0 10px 40px; padding:0px;}
+        #result2 th { background:#A1A1A1 ; color:#FCFCFC; padding:7px 15px; text-align:left;}
+        #result2 td { background:#EBF3FA none repeat-x scroll center left; color:#000; padding:7px 15px; }
+        #result2 tr.odd:not(:last-child):hover td{background:#ADD4FF;}
+        #result2 tr.odd td { background:#E3E3E3 repeat-x scroll center left; cursor:pointer;border-bottom:solid #C2C2C2 1px;}
+        #result2 tr:last-child td{background:#DBDBDB;cursor:auto;border-bottom:none;}
+		#result2 div.arrow { background:transparent url(static/img/arrows.png) no-repeat scroll 0px -16px; width:16px; height:16px; display:block;}
+        #result2 div.up { background-position:0px 0px;}  
+		
+		#resultC { border-collapse:collapse;margin:0;padding:0;position: absolute;top:140px;left:40px;}
+        #resultC h4 { margin:0px; padding:0px;}
+        #resultC img { float:right;}
+        #resultC ul { margin:10px 0 10px 40px; padding:0px;}
+        #resultC th { background:#A1A1A1 ; color:#FCFCFC; padding:7px 15px; text-align:left;}
+        #resultC td { background:#EBF3FA none repeat-x scroll center left; color:#000; padding:7px 15px; }
+        #resultC tr.odd:not(:last-child):hover td{background:#ADD4FF;}
+        #resultC tr.odd td { background:#E3E3E3 repeat-x scroll center left; cursor:pointer;border-bottom:solid #C2C2C2 1px;}
+        #resultC tr:last-child td{background:#DBDBDB;cursor:auto;border-bottom:none;}
+		#resultC div.arrow { background:transparent url(static/img/arrows.png) no-repeat scroll 0px -16px; width:16px; height:16px; display:block;}
+        #resultC div.up { background-position:0px 0px;}		
+		
+		/* button 
+		---------------------------------------------- */
+		.button {
+			display: inline-block;
+			zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+			*display: inline;
+			vertical-align: baseline;
+			margin: 0 2px;
+			outline: none;
+			cursor: pointer;
+			text-align: center;
+			text-decoration: none;
+			font: 14px/100% Arial, Helvetica, sans-serif;
+			padding: .5em 2em .55em;
+			text-shadow: 0 1px 1px rgba(0,0,0,.3);
+			-webkit-border-radius: .5em; 
+			-moz-border-radius: .5em;
+			border-radius: .5em;
+			-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+			-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+			box-shadow: 0 1px 2px rgba(0,0,0,.2);
+		}
+		.button:hover {
+			text-decoration: none;
+		}
+		.button:active {
+			position: relative;
+			top: 1px;
+		}
+
+		.bigrounded {
+			-webkit-border-radius: 2em;
+			-moz-border-radius: 2em;
+			border-radius: 2em;
+		}
+		.medium {
+			font-size: 12px;
+			padding: .4em 1.5em .42em;
+		}
+		.small {
+			font-size: 11px;
+			padding: .2em 1em .275em;
+		}
+
+		/* color styles 
+		---------------------------------------------- */
+
+
+
+		/* gray */
+		.gray {
+			color: #e9e9e9;
+			border: solid 1px #555;
+			background: #6e6e6e;
+			background: -webkit-gradient(linear, left top, left bottom, from(#888), to(#575757));
+			background: -moz-linear-gradient(top,  #888,  #575757);
+			filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#888888', endColorstr='#575757');
+		}
+		.gray:hover {
+			background: #616161;
+			background: -webkit-gradient(linear, left top, left bottom, from(#757575), to(#4b4b4b));
+			background: -moz-linear-gradient(top,  #757575,  #4b4b4b);
+			filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#757575', endColorstr='#4b4b4b');
+		}
+		.gray:active {
+			color: #afafaf;
+			background: -webkit-gradient(linear, left top, left bottom, from(#575757), to(#888));
+			background: -moz-linear-gradient(top,  #575757,  #888);
+			filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#575757', endColorstr='#888888');
+		}
+		
+		/* white */
+		.white {
+			color: #606060;
+			border: solid 1px #b7b7b7;
+			background: #fff;
+			background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+			background: -moz-linear-gradient(top,  #fff,  #ededed);
+			filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');
+		}
+		.white:hover {
+			background: #ededed;
+			background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
+			background: -moz-linear-gradient(top,  #fff,  #dcdcdc);
+			filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dcdcdc');
+		}
+
+		.white:active {
+			color: #999;
+			background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#fff));
+			background: -moz-linear-gradient(top,  #ededed,  #fff);
+			filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#ffffff');
+		}
+	
+    </style>
+<script type="text/javascript">
+// <![CDATA[
+$(document).ready(function() { 
+
+	$("#first-tab").addClass('buttonHover');
+});
+
+function navigate_tabs(container, tab)
+{	
+	$(".b").css('display' , 'none');
+	$(".a").css('display' , 'none');
+	$(".c").css('display' , 'none');
+	$(".d").css('display' , 'none');
+	$(".e").css('display' , 'none');
+	$(".f").css('display' , 'none');
+	$(".g").css('display' , 'none');
+	$(".h").css('display' , 'none');
+	$(".k").css('display' , 'none');
+	$(".i").css('display' , 'none');
+	
+	$("#first-tab").removeClass('buttonHover');
+	$("#second-tab").removeClass('buttonHover');
+	$("#third-tab").removeClass('buttonHover');
+	$("#fourth-tab").removeClass('buttonHover');
+	$("#fifth-tab").removeClass('buttonHover');
+	$("#sixth-tab").removeClass('buttonHover');
+	$("#seventh-tab").removeClass('buttonHover');
+	$("#eighth-tab").removeClass('buttonHover');
+	$("#nineth-tab").removeClass('buttonHover');
+	$("#tenth-tab").removeClass('buttonHover');
+	
+	$("#"+tab).addClass('buttonHover');
+	$("."+container).show(300);
+}
+//Search box js start
+ $(function() {
+				/**
+				* the element
+				*/
+				var $ui = $('#ui_element');
+				var $ui3 = $('#ui_element3');				
+				//phrase search
+				$ui.find('input:password').bind('keypress',function (event){
+				  if (event.keyCode === 13){
+						var values_chk = [];
+						$("#ui_element").find('input:checkbox').each(function(){ 
+							var checked = $(this).attr('checked'); 
+							if(checked){ 
+								values_chk.push($(this).val());
+							}
+						});
+						$('#res_div').empty();
+						if(values_chk.length < 1){
+							values_chk = ['1','2','3','4','5'];
+						}
+						//alert ('hi');
+						getSearchResult($('#ui_element').find('.sb_input').val(),values_chk.join("_"),$('#ui_element').find('input:password').val());
+						$('#ui_element').find('input:password').val('');
+					}
+				});
+				$('#btnsearch').click(function() {
+				var values_chk = [];
+				$("#ui_element").find('input:checkbox').each(function(){ 
+					var checked = $(this).attr('checked'); 
+					if(checked){ 
+						values_chk.push($(this).val());
+					}
+				});
+				$('#res_div').empty();
+				if(values_chk.length < 1){
+					values_chk = ['1','2','3','4','5'];
+				}
+				//alert ('hi');
+				getSearchResult($('#ui_element').find('.sb_input').val(),values_chk.join("_"),$('#ui_element').find('input:password').val());
+				$('#ui_element').find('input:password').val('');
+				
+				});
+				
+				//question search	
+				$ui3.find('input:password').bind('keypress',function (event){
+				  if (event.keyCode === 13){
+						var values_chk1 = [];
+						$("#ui_element3").find('input:checkbox').each(function(){ 
+							var checked = $(this).attr('checked'); 
+							if(checked){ 
+								values_chk1.push($(this).val());
+							}
+						});
+						$('#res_div3').empty();
+						if(values_chk1.length < 1){
+							values_chk1 = ['1','6','7'];
+						}
+						//alert ('hi');
+						getSearchQuestionResult($('#ui_element3').find('.sb_input').val(),values_chk1.join("_"),$('#ui_element3').find('input:password').val());
+						$('#ui_element3').find('input:password').val('');
+					}
+				});				
+				$('#btnsearch1').click(function() {
+					var values_chk1 = [];
+					$("#ui_element3").find('input:checkbox').each(function(){ 
+						var checked = $(this).attr('checked'); 
+						if(checked){ 
+							values_chk1.push($(this).val());
+						}
+					});
+					$('#res_div3').empty();
+					if(values_chk1.length < 1){
+						values_chk1 = ['1','6','7'];
+					}
+					//alert ('hi');
+					getSearchQuestionResult($('#ui_element3').find('.sb_input').val(),values_chk1.join("_"),$('#ui_element3').find('input:password').val());
+					$('#ui_element3').find('input:password').val('');
+				
+				});
+				
+				//category search
+				$('#ui_element4').find('input:password').bind('keypress',function (event){
+				  if (event.keyCode === 13){
+						getSearchCategoryResult($('#ui_element4').find('.sb_input').val(),$('#ui_element4').find('input:password').val());
+						$('#ui_element4').find('input:password').val('');
+					}
+				});		
+				$('#btnsearch2').click(function() {				
+				//alert ('hi');
+				getSearchCategoryResult($('#ui_element4').find('.sb_input').val(),$('#ui_element4').find('input:password').val());
+				$('#ui_element4').find('input:password').val('');
+				
+				});
+				
+				/**
+				* on focus and on click display the dropdown, 
+				* and change the arrow image
+				*/
+				$ui.find('.sb_input').bind('focus click',function(){
+					$ui.find('.sb_down')
+					   .addClass('sb_up')
+					   .removeClass('sb_down')
+					   .andSelf()
+					   .find('.sb_dropdown')
+					   .show();
+				});
+				
+				$ui3.find('.sb_input').bind('focus click',function(){
+					$ui3.find('.sb_down')
+					   .addClass('sb_up')
+					   .removeClass('sb_down')
+					   .andSelf()
+					   .find('.sb_dropdown')
+					   .show();
+				});
+				
+				/**
+				* on mouse leave hide the dropdown, 
+				* and change the arrow image
+				*/
+				$ui.bind('mouseleave',function(){
+					$ui.find('.sb_up')
+					   .addClass('sb_down')
+					   .removeClass('sb_up')
+					   .andSelf()
+					   .find('.sb_dropdown')
+					   .hide();
+				});
+				
+				$ui3.bind('mouseleave',function(){
+					$ui3.find('.sb_up')
+					   .addClass('sb_down')
+					   .removeClass('sb_up')
+					   .andSelf()
+					   .find('.sb_dropdown')
+					   .hide();
+				});
+				
+				/**
+				* selecting all checkboxes
+				*/
+				$ui.find('.sb_dropdown').find('label[for="all"]').prev().bind('click',function(){
+					$(this).parent().siblings().find(':checkbox').attr('checked',this.checked).attr('disabled',this.checked);
+				});
+				
+				$ui3.find('.sb_dropdown').find('label[for="all"]').prev().bind('click',function(){
+					$(this).parent().siblings().find(':checkbox').attr('checked',this.checked).attr('disabled',this.checked);
+				});
+				
+				//date picker
+				$( "#datepicker1" ).datepicker();
+				$( "#datepicker2" ).datepicker();
+				$( "#datepicker3" ).datepicker();
+				$( "#datepicker4" ).datepicker();
+				$( "#datepicker5" ).datepicker();
+				$( "#datepicker6" ).datepicker();
+				
+				//show button click history word
+				$('#ui_element1').find('input:password').bind('keypress',function (event){
+				  if (event.keyCode === 13){
+						if($( "#datepicker1" ).val() && $( "#datepicker2" ).val()){
+						//alert ($( "#datepicker1" ).val());
+						var startdate = $( "#datepicker1" ).val().replace(/\//ig,"-");
+						var enddate = $( "#datepicker2" ).val().replace(/\//ig,"-");
+						downloadUrl("/historyword", "POST", "startdate="+encodeURI(startdate)+"&enddate="+ encodeURI(enddate)+"&code="+encodeURI($('#ui_element1').find('input:password').val()), onResultReturned1);
+						$('#ui_element1').find('input:password').val('');
+						}
+						else{
+							alert ("please input start date and end date");
+						}
+					}
+				});		
+				$('#btnShow').click(function() {
+				if($( "#datepicker1" ).val() && $( "#datepicker2" ).val()){
+					//alert ($( "#datepicker1" ).val());
+					var startdate = $( "#datepicker1" ).val().replace(/\//ig,"-");
+					var enddate = $( "#datepicker2" ).val().replace(/\//ig,"-");
+					downloadUrl("/historyword", "POST", "startdate="+encodeURI(startdate)+"&enddate="+ encodeURI(enddate)+"&code="+encodeURI($('#ui_element1').find('input:password').val()), onResultReturned1);
+					$('#ui_element1').find('input:password').val('');
+				}
+				else{
+					alert ("please input start date and end date");
+				}
+				});
+				
+				//history question
+				$('#ui_element2').find('input:password').bind('keypress',function (event){
+				  if (event.keyCode === 13){
+							if($( "#datepicker3" ).val() && $( "#datepicker4" ).val()){
+							//alert ($( "#datepicker1" ).val());
+								var startdate = $( "#datepicker3" ).val().replace(/\//ig,"-")+ " 00:00:00";
+								var enddate = $( "#datepicker4" ).val().replace(/\//ig,"-")+ " 00:00:00";
+								var filter='all';
+								$("#ui_element2").find('input:radio').each(function(){ 
+									if($(this).attr('checked')){ 
+										filter = $(this).attr('value');
+										//alert(filter);
+									}
+								});
+								downloadUrl("/historyquestion", "POST", "startdate="+encodeURI(startdate)+"&enddate="+ encodeURI(enddate)+"&filter="+ encodeURI(filter)+"&code="+encodeURI($('#ui_element2').find('input:password').val()), onResultReturned2);
+								$('#ui_element2').find('input:password').val('');
+							}
+							else{
+								alert ("please input start date and end date");
+							}	
+					}
+				});		
+				$('#btnShow1').click(function() {
+				if($( "#datepicker3" ).val() && $( "#datepicker4" ).val()){
+					//alert ($( "#datepicker1" ).val());
+					var startdate = $( "#datepicker3" ).val().replace(/\//ig,"-")+ " 00:00:00";
+					var enddate = $( "#datepicker4" ).val().replace(/\//ig,"-")+ " 00:00:00";
+					var filter='all';
+					$("#ui_element2").find('input:radio').each(function(){ 
+						if($(this).attr('checked')){ 
+							filter = $(this).attr('value');
+							//alert(filter);
+						}
+					});
+					downloadUrl("/historyquestion", "POST", "startdate="+encodeURI(startdate)+"&enddate="+ encodeURI(enddate)+"&filter="+ encodeURI(filter)+"&code="+encodeURI($('#ui_element2').find('input:password').val()), onResultReturned2);
+					$('#ui_element2').find('input:password').val('');
+				}
+				else{
+					alert ("please input start date and end date");
+				}
+				});		
+				//statistic of phrase				
+				$('#ui_element5').find('input:password').bind('keypress',function (event){
+					  if (event.keyCode === 13){
+							if($( "#datepicker5" ).val() && $( "#datepicker6" ).val()){
+							//alert ($( "#datepicker1" ).val());
+							var startdate = $( "#datepicker5" ).val().replace(/\//ig,"-");
+							var enddate = $( "#datepicker6" ).val().replace(/\//ig,"-");
+							downloadUrl("/statisticphrases", "POST", "startdate="+encodeURI(startdate)+"&enddate="+ encodeURI(enddate)+"&code="+encodeURI($('#ui_element5').find('input:password').val()), onStatisticPhraseReturned);
+							$('#ui_element5').find('input:password').val('');
+							}
+							else{
+								alert ("please input start date and end date");
+							}
+						}
+					});		
+				$('#btnShow2').click(function() {
+					if($( "#datepicker5" ).val() && $( "#datepicker6" ).val()){
+						//alert ($( "#datepicker1" ).val());
+						var startdate = $( "#datepicker5" ).val().replace(/\//ig,"-");
+						var enddate = $( "#datepicker6" ).val().replace(/\//ig,"-");
+						downloadUrl("/statisticphrases", "POST", "startdate="+encodeURI(startdate)+"&enddate="+ encodeURI(enddate)+"&code="+encodeURI($('#ui_element5').find('input:password').val()), onStatisticPhraseReturned);
+						$('#ui_element5').find('input:password').val('');
+					}
+					else{
+						alert ("please input start date and end date");
+					}
+					});
+				
+				$('#addquestion_form').submit(function(e) {					
+					   e.preventDefault();				   
+					   createLoader();
+					   // a sample AJAX request
+					   $.ajax({
+					     url : this.action,
+					     type : this.method,
+					     data : $(this).serialize(),
+					     success : function(response) {
+					    	 $('#addquestion_form').find('input:password').val('')
+					    	 removeLoader();
+					    	 alert(response);
+					     },
+					     error: function (request, status, error) {
+							   removeLoader();
+						        alert("-responseText: "+request.responseText + "\n-Status: " +request.status+"\n-Error: "+error );
+						    }
+					   });
+					});
+				$('#addcategory_form').submit(function(e) {					
+					   e.preventDefault();				   
+					   createLoader();
+					   // a sample AJAX request
+					   $.ajax({
+					     url : this.action,
+					     type : this.method,
+					     data : $(this).serialize(),
+					     success : function(response) {
+					    	 $('#addcategory_form').find('input:password').val('')
+					    	 removeLoader();					    	 
+					    	 $('#category_response').val(response);
+					    	 
+					     },
+					     error: function (request, status, error) {
+							   removeLoader();
+						        alert("-responseText: "+request.responseText + "\n-Status: " +request.status+"\n-Error: "+error );
+						    }
+					   });
+					});
+				$('#addphrase_form').submit(function(e) {					
+					   e.preventDefault();				   
+					   createLoader();
+					   // a sample AJAX request
+					   $.ajax({
+					     url : this.action,
+					     type : this.method,
+					     data : $(this).serialize(),
+					     success : function(response) {
+					    	 $('#addphrase_form').find('input:password').val('')
+					    	 removeLoader();
+					    	 alert(response);
+					     },
+					   error: function (request, status, error) {
+						   removeLoader();
+					        alert("-responseText: "+request.responseText + "\n-Status: " +request.status+"\n-Error: "+error );
+					    }
+					   });
+					});
+            });	
+// search box js end
+	function getSearchResult(keyword,category,code) {
+		downloadUrl("/searchword", "POST", "keyword="+encodeURI(keyword)+"&category="+ encodeURI(category)+"&code="+encodeURI(code), onResultReturned);
+    }
+
+	function getSearchQuestionResult(keyword,category,code) {
+		downloadUrl("/searchquestion", "POST", "keyword="+encodeURI(keyword)+"&category="+ encodeURI(category)+"&code="+encodeURI(code), onQuestionResultReturned);
+    }
+	
+	function getSearchCategoryResult(keyword,code) {
+		downloadUrl("/searchcategory", "POST", "keyword="+encodeURI(keyword)+"&code="+encodeURI(code), onCategoryResultReturned);
+    }
+	
+	function onResultReturned(responseText) {		
+		//alert(responseText);
+		document.getElementById("res_div").innerHTML = responseText;
+		$("#result tr:odd").addClass("odd");
+		$("#result tr:not(.odd)").hide();
+		$("#result tr:first-child").show();
+				   
+		$("#result tr.odd").click(function(){
+			$(this).next("tr").toggle();
+			$(this).find(".arrow").toggleClass("up");
+		});
+		$('#res_div').show();
+		
+		
+	}
+	
+	function onQuestionResultReturned(responseText) {		
+		//alert(responseText);
+		document.getElementById("res_div3").innerHTML = responseText;
+		$("#result2 tr:odd").addClass("odd");
+		$("#result2 tr:not(.odd)").hide();
+		$("#result2 tr:first-child").show();
+				   
+		$("#result2 tr.odd").click(function(){
+			$(this).next("tr").toggle();
+			$(this).find(".arrow").toggleClass("up");
+		});
+		$('#res_div3').show();
+
+	}
+	
+	function onCategoryResultReturned(responseText) {		
+		//alert(responseText);
+		document.getElementById("res_div4").innerHTML = responseText;
+		$("#resultC tr:odd").addClass("odd");
+		$("#resultC tr:not(.odd)").hide();
+		$("#resultC tr:first-child").show();
+				   
+		$("#resultC tr.odd").click(function(){
+			$(this).next("tr").toggle();
+			$(this).find(".arrow").toggleClass("up");
+		});
+		$('#res_div4').show();
+		
+		
+	}
+
+	function onResultReturned1(responseText) {		
+		//alert(responseText);
+		document.getElementById("res_div1").innerHTML = responseText;
+		$("#resultW tr:odd").addClass("odd");
+		$("#resultW tr:not(.odd)").hide();
+		$("#resultW tr:first-child").show();
+				   
+		$("#resultW tr.odd").click(function(){
+			$(this).next("tr").toggle();
+			$(this).find(".arrow").toggleClass("up");
+		});
+		$('#res_div1').show();
+		
+		
+	}
+	
+	function onResultReturned2(responseText) {
+		//alert(responseText);
+		document.getElementById("res_div2").innerHTML = responseText;
+		$("#resultQ tr:odd").addClass("odd");
+		$("#resultQ tr:not(.odd)").hide();
+		$("#resultQ tr:first-child").show();
+				   
+		$("#resultQ tr.odd").click(function(){
+			$(this).next("tr").toggle();
+			$(this).find(".arrow").toggleClass("up");
+		});
+		$('#res_div2').show();
+		
+		
+	}
+	
+	function onStatisticPhraseReturned(responseText){
+		//alert(responseText);
+		var obj = null;
+		try {
+			obj = jQuery.parseJSON(responseText);
+		  } catch (e) {
+			  obj = null;
+		  }		
+		if(obj!=null){			
+			if(obj.phrasedata!=null && obj.phrasedata.length>0){				
+				 var dataPoints = [];
+				 var nDays = 0;
+				 var nPhrases = 0;
+				 for(var i in obj.phrasedata) {					 
+					 //alert(obj.phrasedata[i].date + " "+obj.phrasedata[i].phraseslist.length+" "+obj.phrasedata[i].phraseslist);
+					 //alert(obj.phrasedata[i].phraseslist.join(" ; "));
+					 dataPoints.push({x:new Date(obj.phrasedata[i].date),
+			                y:obj.phrasedata[i].phraseslist.length,
+			                label:obj.phrasedata[i].date,
+			                name:obj.phrasedata[i].phraseslist.join("<br/>+&nbsp")});
+					 nDays++;
+					 nPhrases+=obj.phrasedata[i].phraseslist.length;
+		         }
+				 if(dataPoints.length>0){					
+					 new columnChart('phrase_chart_container', dataPoints,
+							 "Statistic from " + obj.phrasedata[0].date + " to " + obj.phrasedata[obj.phrasedata.length-1].date,
+							 "Total " + nDays + " day(s)",
+							 "Total " + nPhrases + " phrase(s)",
+							 'boxpopup','boxpopup_content');
+				 }
+				 
+		    }else{
+		    	 alert(obj.message) ;
+		    }
+		}else{
+			alert("Response = '"+responseText+"' from server cannot be parsed!") ;
+		}
+	}
+	
+	function spanDbClick(idSpan,idHidden,idTd,type){		
+		var $span = $('#'+idSpan);		
+		if($span.find("textarea").length > 0)//found textarea		
+			return;		
+			
+		//alert ($span.text());
+		var text = $span.text().trim();	
+		
+		$span.text('');
+		$("<textarea>").attr('name','newname')
+		.attr('rows','5')
+		.attr('cols','50')
+		.val(text).appendTo($span);
+		
+		$("<br>").appendTo($span);
+		
+		$("<input>").attr('type','button')
+		.attr('class','button small gray')
+		.attr('value','Save')
+		.click(function () {
+			updateProcessing(idSpan,idHidden,idTd,type);			
+    	}).appendTo($span);
+		
+		$("<input>").attr('type','button')
+		.attr('class','button small gray')
+		.attr('value','Cancel')
+		.click(function () {
+			submitNewText(idSpan,text);			
+    	}).appendTo($span);	
+		
+		$span.children(':first').focus();
+	}
+
+	function submitNewText(idSpan,srctext)
+	{		
+		var $span = $('#'+idSpan);		
+		//$span.text(jQuery.trim($span.children(':first').val()));		
+		$span.text(srctext);
+	}
+	
+	function updateProcessing(idSpan,idHidden,idTd,type)
+	{		
+		//alert(idSpan + idHidden);
+		var $span = $('#'+idSpan);
+		var $hidden = $('#'+idHidden);
+		var $tD = $('#'+idTd);
+		//var $txtcode = $span.find('input:password');		
+		var spantxt = jQuery.trim($span.children(':first').val());
+		//alert(spantxt);
+		if((type=='5'||type=='55') && spantxt.indexOf('#')!=-1){//if update the existed category for phrase
+			var parts = spantxt.split('#');
+			spantxt = parts[0];
+		}
+		var pos = spantxt.length;
+		var pos1 = 0;
+		var i = 0;
+		var n = 3;//number of words to be displayed 
+		for(;i<= n && pos1!=-1 ;i++)
+		{	
+			pos = pos1;
+			pos1 = spantxt.indexOf(' ',pos1+1);
+		}
+		var shorttxt = spantxt;
+		if(i>n)
+			shorttxt = spantxt.substring(0,pos)+' ...';
+		
+		//alert(spantxt);
+		if(type=='1'){//question
+			downloadUrl("/updatequestion", "POST", "answer="+encodeURI(jQuery.trim($span.children(':first').val()))+"&key="+ encodeURI(jQuery.trim($hidden.attr('value')))+"&code="+encodeURI($('#ui_element2').find('input:password').val()), null);
+		}
+		else if(type=='11'){//question
+			downloadUrl("/updatequestion", "POST", "answer="+encodeURI(jQuery.trim($span.children(':first').val()))+"&key="+ encodeURI(jQuery.trim($hidden.attr('value')))+"&code="+encodeURI($('#ui_element3').find('input:password').val()), null);
+		}
+		else if (type=='2'){//update english meaning for wordphrase
+			downloadUrl("/updateword", "POST", "category=&vi_meant=&en_meant="+encodeURI(jQuery.trim($span.children(':first').val()))+"&key="+ encodeURI(jQuery.trim($hidden.attr('value')))+"&code="+encodeURI($('#ui_element1').find('input:password').val()), null);
+		}
+		else if (type=='22'){//update english meaning for wordphrase
+			downloadUrl("/updateword", "POST", "category=&vi_meant=&en_meant="+encodeURI(jQuery.trim($span.children(':first').val()))+"&key="+ encodeURI(jQuery.trim($hidden.attr('value')))+"&code="+encodeURI($('#ui_element').find('input:password').val()), null);
+		}
+		else if (type=='3'){//update vietnamese meaning for wordphrase
+			downloadUrl("/updateword", "POST", "category=&en_meant=&vi_meant="+encodeURI(jQuery.trim($span.children(':first').val()))+"&key="+ encodeURI(jQuery.trim($hidden.attr('value')))+"&code="+encodeURI($('#ui_element1').find('input:password').val()), null);
+		}
+		else if (type=='33'){//update vietnamese meaning for wordphrase
+			downloadUrl("/updateword", "POST", "category=&en_meant=&vi_meant="+encodeURI(jQuery.trim($span.children(':first').val()))+"&key="+ encodeURI(jQuery.trim($hidden.attr('value')))+"&code="+encodeURI($('#ui_element').find('input:password').val()), null);
+		}
+		else if (type=='5'){//update category for wordphrase in history
+			downloadUrl("/updateword", "POST", "en_meant=&vi_meant=&category="+encodeURI(jQuery.trim($span.children(':first').val()))+"&key="+ encodeURI(jQuery.trim($hidden.attr('value')))+"&code="+encodeURI($('#ui_element1').find('input:password').val()), null);
+		}
+		else if (type=='55'){//update category for wordphrase in search
+			downloadUrl("/updateword", "POST", "en_meant=&vi_meant=&category="+encodeURI(jQuery.trim($span.children(':first').val()))+"&key="+ encodeURI(jQuery.trim($hidden.attr('value')))+"&code="+encodeURI($('#ui_element').find('input:password').val()), null);
+		}
+		else if (type=='4'){//update category name for category					
+			downloadUrl("/updatecategory", "POST", "cate_name="+encodeURI(jQuery.trim($span.children(':first').val()))+"&key="+ encodeURI(jQuery.trim($hidden.attr('value')))+"&code="+encodeURI($('#ui_element4').find('input:password').val()), null);
+			var catestr = $span.closest('td').find("textarea:nth-child(1)").val().trim();
+			var cateparts = catestr.split('#');
+			var newtext = $span.children(':first').val().trim()+'#'+cateparts[1];
+			$span.closest('td').find("textarea:nth-child(1)").text(newtext);	
+		}
+		//textfield.parentNode.innerText= jQuery.trim(textfield.value);
+		
+		$tD.text(shorttxt);
+		//alert($hidden.attr('value'));
+		$span.text(spantxt);
+	}
+
+// ]]>
+</script>
+
+</head>
+<body>
+	<div class="modal"></div>
+	<div align="center">
+		
+		<div id="wrap" >
+		<div style="background-color:#ffffff;">
+			<a href="javascript:navigate_tabs('a','first-tab');" class="buttons" id="first-tab">Search Ws</a>			
+			<a href="javascript:navigate_tabs('b','second-tab');" class="buttons" id="second-tab">Add Ws</a>
+			<a href="javascript:navigate_tabs('c','third-tab');" class="buttons" id="third-tab">History Ws</a>
+			<a href="javascript:navigate_tabs('h','eighth-tab');" class="buttons" id="eighth-tab">List Cs</a>
+			<a href="javascript:navigate_tabs('k','nineth-tab');" class="buttons" id="nineth-tab">Add Cs</a>
+			<a href="javascript:navigate_tabs('f','sixth-tab');" class="buttons" id="sixth-tab">Search Qs</a>			
+			<a href="javascript:navigate_tabs('d','fourth-tab');" class="buttons" id="fourth-tab">Add Qs</a>
+			<a href="javascript:navigate_tabs('e','fifth-tab');" class="buttons" id="fifth-tab">History Qs</a>	
+			<a href="javascript:navigate_tabs('i','tenth-tab');" class="buttons" id="tenth-tab">Statistic</a>		
+			<a href="javascript:navigate_tabs('g','seventh-tab');" class="buttons" id="seventh-tab">Info</a>
+			<br clear="all" />
+		</div>	
+			<div id="body" align="center">
+				<div class="b">				
+					<div class="wrapper">
+					<form class="txtinput" action="/addword" method="post" id="addphrase_form">
+						<fieldset>
+							<legend>Input a new word or phrase</legend>
+								<ol class="clearfix">
+								<li class="midle">
+									<label class="titleform" for="firstname">Word or Phrase</label>
+									<input class ="txtinput" style="width:350px" size="35" name="word_input" id="word_input" type="text">
+								</li>
+								<li class="midle">
+									<label class="titleform" for="email">Category <a href="javascript:navigate_tabs('h','eighth-tab');" style="text-decoration: none"> <span style="color:#CC0000;font-weight:bold">&nbsp;&nbsp;&nbsp; Use existed category? </span></a></label>
+									<input  class ="txtinput" style="width:250px"  size="35" name="category_input" id="category_input" type="text">									
+								</li>
+								<li class="midle">
+									<label class="titleform" for="content">Vietnamese:</label>
+									<textarea cols="32" rows="7" name="vi_meant_input" id="vi_meant_input"></textarea>
+								</li>
+								<li class="midle">
+									<label class="titleform" for="content">English:</label>
+									<textarea cols="32" rows="7" name="en_meant_input" id="en_meant_input"></textarea>
+								</li>
+								<li class="midle">
+									<label class="titleform" for="email">Code</label>
+									<input  class ="txtinput" style="width:150px"  size="25" name="code" id="code" type="password">
+								</li>
+								<li class="last">
+									<input class="txtsub" name="submit" id="submit" value="Submit" type="submit">
+								</li>
+							</ol>
+						</fieldset>
+					</form>
+					<br />
+					</div>
+				</div>	
+				<div class="a">
+				<div class="box">
+				<div id ="res_div" style="display:none;">
+				
+				</div>
+				<h2>Search word or phrase</h2>
+                <form id="ui_element" class="sb_wrapper">
+                    <p>
+						<span class="sb_down"></span>
+						<input class="sb_input" type="text"/>
+						<input class="sb_search" type="button" value="" id="btnsearch"/>
+						<input class ="txtinput" style="position:absolute; top:5px; left:390px;height:20px;width:50px"  size="15" name="code_input" type="password">
+					</p>
+					<ul class="sb_dropdown" style="display:none;">
+						<li class="sb_filter">Filter your search</li>
+						<li><input type="checkbox" id="chk1" value="1" checked/><label for="all"><strong>All</strong></label></li>
+						<li><input type="checkbox" id="chk2" value="2" checked disabled/><label for="Automotive">Phrase</label></li>
+						<li><input type="checkbox" id="chk3" value="3" checked disabled/><label for="Baby">Category</label></li>
+						<li><input type="checkbox" id="chk4" value="4" checked disabled/><label for="Beauty">English</label></li>
+						<li><input type="checkbox" id="chk5" value="5" checked disabled/><label for="Books">Vietnamese</label></li>
+					</ul>
+                </form>
+				
+				</div>
+				</div>
+				
+				<div class="c" >
+				<div class="box" >
+				<div id ="res_div1" style="display:none;"></div>
+				<h2>History of words or phrases by date</h2>
+                <form id="ui_element1" class="sb_wrapper1">
+				<table  cellspacing="50">
+					<tr>
+						<td>
+						<p>Start date: <input type="text" class ="datetime" id="datepicker1"></p> 
+						</td>
+						<td >
+						<p>End date: <input type="text" class ="datetime" id="datepicker2"></p> 
+						</td>
+						<td>
+						<p><br/> <input class="button medium white" type="button" value="Show" id = "btnShow" /> </p>
+						</td>
+					</tr>
+				</table>
+				<input class ="txtinput" style="position:absolute;top:62px;left:560px;height:10px;width:50px"  size="15" name="code_input" type="password">
+                </form>
+				
+				</div>
+				
+				</div>
+				
+				<div class="d">				
+					<div class="wrapper">
+					<form class="txtinput" action="/addquestion" method="post" id="addquestion_form">
+						<fieldset>
+							<legend>Input a new question</legend>
+								<ol class="clearfix">
+								<li class="midle">
+									<label class="titleform" for="content">Question content:</label>
+									<textarea cols="32" rows="7" name="content_input" id="content_input"></textarea>
+								</li>
+								<li class="midle">
+									<label class="titleform" for="content">Answer content (Optional):</label>
+									<textarea cols="32" rows="7" name="answer_input" id="answer_input"></textarea>
+								</li>
+								<li class="midle">
+									<label class="titleform" for="email">Code</label>
+									<input  class ="txtinput" style="width:150px"  size="25" name="code" id="code" type="password">
+								</li>
+								<li class="last">
+									<input class="txtsub" name="submit" id="submit" value="Submit" type="submit">
+								</li>
+							</ol>
+						</fieldset>
+					</form>
+					<br />
+					</div>
+				</div>
+				
+				<div class="e" >
+				<div class="box" >
+				<div id ="res_div2" style="display:none;"></div>
+				<h2>History of questions by date</h2>
+                <form id="ui_element2" class="sb_wrapper1">
+				<table style="margin-top:20px;margin-left:50px;" cellspacing="30px">
+					<tr>
+						<td>
+						<p>Start date: <input type="text" class ="datetime" id="datepicker3"></p> 
+						</td>
+						<td >
+						<p>End date: <input type="text"  class ="datetime" id="datepicker4"></p> 
+						</td>
+						<td>
+						<p><br/> <input class="button medium white" type="button" value="Show" id = "btnShow1" /> </p>						
+						</td>
+					</tr>
+					<tr >
+						<td>
+							<input type="radio" name="status" value="all" checked/> All&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							<input type="radio" name="status" value="yes" /> Answered
+						</td>
+						<td>	
+							<input type="radio" name="status" value="no" /> Not answered yet
+						</td>
+						
+					</tr>
+				</table>
+				<input class ="txtinput" style="position:absolute;top:62px;left:560px;height:10px;width:50px"  size="15" name="code_input" type="password">
+                </form>
+				
+				</div>
+				</div>
+				
+				<div class="f">
+				<div class="box">
+				<div id ="res_div3" style="display:none;">
+				
+				</div>
+				<h2>Search questions</h2>
+                <form id="ui_element3" class="sb_wrapper">
+                    <p>
+						<span class="sb_down"></span>
+						<input class="sb_input" type="text"/>
+						<input class="sb_search" type="button" value="" id="btnsearch1"/>
+						<input class ="txtinput" style="position:absolute; top:5px; left:390px;height:20px;width:50px"  size="15" name="code_input" type="password">
+					</p>
+					<ul class="sb_dropdown" style="display:none;">
+						<li class="sb_filter">Filter your search</li>
+						<li><input type="checkbox" id="chk11" value="1" checked/><label for="all"><strong>All</strong></label></li>
+						<li><input type="checkbox" id="chk12" value="6" checked disabled/><label for="Automotive">Question</label></li>
+						<li><input type="checkbox" id="chk13" value="7" checked disabled/><label for="Baby">Answer</label></li>
+					</ul>
+                </form>
+				
+				</div>
+				</div>
+				
+				<div class="h">
+				<div class="box">
+				<div id ="res_div4" style="display:none;">
+				
+				</div>
+				<h2>Categories list</h2>
+                <form id="ui_element4" class="sb_wrapper">
+                    <p>
+						<span class="sb_down"></span>
+						<input class="sb_input" type="text"/>
+						<input class="sb_search" type="button" value="" id="btnsearch2"/>
+						<input class ="txtinput" style="position:absolute; top:5px; left:390px;height:20px;width:50px"  size="15" name="code_input" type="password">
+					</p>
+					<ul class="sb_dropdown" style="display:none;">
+						
+					</ul>
+                </form>
+				
+				</div>
+				</div>
+				
+				<div class="k">				
+					<div class="wrapper">
+					<form class="txtinput" action="/addcategory" method="post" id="addcategory_form">
+						<fieldset>
+							<legend>Input a new category</legend>
+								<ol class="clearfix">
+								<li class="midle">
+									<label class="titleform" for="content">Category name:</label>
+									<textarea cols="32" rows="7" name="content_input" id="content_input"></textarea>
+								</li>	
+								<li class="midle">
+									<label class="titleform" for="content">Response(don't input):</label>
+									<textarea readonly cols="32" rows="3" id="category_response"></textarea>
+								</li>								
+								<li class="midle">
+									<label class="titleform" for="email">Code</label>
+									<input  class ="txtinput" style="width:150px"  size="25" name="code" id="code" type="password">
+								</li>
+								<li class="last">
+									<input class="txtsub" name="submit" id="submit" value="Submit" type="submit">
+								</li>
+							</ol>
+						</fieldset>
+					</form>
+					<br />
+					</div>
+				</div>
+				
+				<div class="i" >				
+				<div class="box" >				
+				<h2>Statistic of phrases by date</h2>
+                <form id="ui_element5" class="sb_wrapper1">
+				<table  cellspacing="50">
+					<tr>
+						<td>
+						<p>Start date(0): <input type="text" class ="datetime" id="datepicker5"></p>
+						</td>
+						<td >
+						<p>End date(1): <input type="text" class ="datetime" id="datepicker6"></p> 
+						</td>
+						<td>
+						<p><br/> <input class="button medium white" type="button" value="Show" id = "btnShow2" /> </p>
+						</td>
+					</tr>					
+				</table>
+				<input class ="txtinput" style="position:absolute;top:62px;left:560px;height:10px;width:50px"  size="15" name="code_input" type="password">               
+                </form>				
+                <div style="text-align:left;height:300px;width:100%;position: absolute;top:140px;left:0px;">
+                <div id="phrase_chart_container"></div>
+                </div>	
+                <div id="boxpopup" class="boxpopup">
+                	<a onclick="closeOffersDialog('boxpopup');" class="boxclose"></a>				
+					<div id="boxpopup_content">
+					</div>
+				</div>							
+				</div>				
+				</div>
+				
+				<div class="g">
+				<h2>Author : PhanNguyen <br/>
+					Project : This is a personal project which is used for storing personal data over the internet <br/>
+					Contact : pcnguyen.info@gmail.com <br/>
+					Copyright 2011 by PhanNguyen
+				</h2>                
+				</div>
+				</div>
+		</div>		
+	</div>
+		  
+
+</body>
+</html>

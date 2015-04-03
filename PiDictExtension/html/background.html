@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Auto translate plugin for Google Chrome</title>
+  <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	  <script >
+	//load google api for language translator
+	//google.load("language", "1");
+	
+    var id = chrome.contextMenus.create({"title": "See list of words", "contexts":["all"],"onclick": genericOnClick});
+    var radio1 = chrome.contextMenus.create({"title": "Enable", "type": "radio","contexts":["all"],"checked":true,"onclick":radio1OnClick});
+	var radio2 = chrome.contextMenus.create({"title": "Disable", "type": "radio","contexts":["all"],"onclick":radio2OnClick});
+	 
+	function radio1OnClick(info, tab) {
+	  //console.log("radio item " + info.menuItemId + " was clicked (previous checked state was "  + info.wasChecked + ")");
+	  isTranslate = true;
+	}
+	function radio2OnClick(info, tab) {
+	  isTranslate = false;
+	}
+	function genericOnClick(info, tab) {
+	  //console.log("item " + info.menuItemId + " was clicked");
+	  focusOrCreateTab(newpage_url);
+	}
+    function onRequest(request,sender, sendResponse) {
+		if (isTranslate && request.action == 'translate') {
+		alert(request.searchfor);
+		doTranslate(request.searchfor,"en","vi",sendResponse);
+			/*google.language.translate(request.searchfor,"en", "vi",function(result) {
+			if (result.translation) {
+				var isFirst = true;
+				if(newWordTabId != -1){					
+					isFirst = false;
+				}
+				sendResponse({text:result.translation.toString(),status: isFirst});
+            }
+          });*/
+			
+        }
+		else if (request.action == 'create') {
+			funcSendResponse = sendResponse;
+			createTab(newpage_url);
+			//sendResponse({text:"1"});
+		}
+    };
+	function doTranslate(text, fromLang, toLang,sendResponse) {
+	sendReqTranslate(text, fromLang,toLang, function(result, text) {
+			if (result.sentences.length > 0) {
+				//alert(result.sentences.length);
+                        var textTrans = '';
+                        for(i in result.sentences) {
+                            if(textTrans.length != 0) {
+                                textTrans += ' ';
+                            }
+                            textTrans += result.sentences[i].trans;
+                        }
+                        var textAdditional = null;
+                        if(result.dict && result.dict.length > 0) {
+                            if(textTrans.length != 0) {
+                                textTrans += '\n';
+                            }
+                            textAdditional = '';
+                            for(dict in result.dict) {
+                                if(result.dict[dict].pos.length > 0) {
+                                    textAdditional += '[' + result.dict[dict].pos + ']';
+                                }
+                                textAdditional += ' ' + result.dict[dict].terms.join(', ') + '.\n';
+                            }
+                        }
+						var isFirst = true;
+						if(newWordTabId != -1){					
+							isFirst = false;
+						}
+						//alert(textTrans+' '+textAdditional);
+						sendResponse({text:textTrans+' '+textAdditional,status: isFirst});
+                }
+            });                
+    }
+	function sendReqTranslate(text, fromLang, toLang, callback) {
+			//alert(text + fromLang+toLang);
+            //var url = 'http://translate.google.com/translate_a/t?client=t&otf=1&pc=0';
+            var url = 'http://translate.google.com/translate_a/t?client=f&otf=1&pc=0';
+            url += '&text=' + text;
+            url += '&hl=vi';
+            if(fromLang != 'auto') {
+                url += '&sl=' + fromLang;
+            }
+            url += '&tl=' + toLang;
+			//alert(url);
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", url, true);
+            xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4) {
+                    // JSON.parse does not evaluate the attacker's scripts.
+					callback(JSON.parse(xhr.responseText), text);
+                }
+            }
+            xhr.send();
+    }
+		
+	function initialize() {
+		//do something if need
+    }
+    google.setOnLoadCallback(initialize);
+	// Listen for the content script to send a message to the background page.
+    chrome.extension.onRequest.addListener(onRequest);	
+	
+    chrome.tabs.onSelectionChanged.addListener(function(tabId) {
+		//alert(tabId);
+		//selectedTabId = tabId;	
+		//iclick = 0;
+    });
+	chrome.tabs.onRemoved.addListener(function(tabId) {
+		if(tabId == newWordTabId){
+			newWordTabId = -1;
+		}		
+		
+	});
+    var newpage_url = chrome.extension.getURL("newword.html");
+	var isTranslate = true;
+	var newWordTabId = -1;
+	var funcSendResponse = null;
+	//load new page
+	chrome.browserAction.onClicked.addListener(function(tab) {
+		focusOrCreateTab(newpage_url);				
+	});	
+	function focusOrCreateTab(url) {	
+	  chrome.windows.getAll({"populate":true}, function(windows) {	  
+		var existing_tab = null;
+		for (var i in windows)
+		{
+		  var tabs = windows[i].tabs;
+		  for (var j in tabs)
+		  {
+			var tab = tabs[j];
+			if (tab.url == url) 
+			{
+			  existing_tab = tab;
+			  break;
+			}
+		  }
+		}
+		if (existing_tab) {
+		  chrome.tabs.update(existing_tab.id, {"selected":true});
+		} else {
+		  chrome.tabs.create({"url":url, "selected":true},function(newTabid){newWordTabId = newTabid.id;});
+		}
+	  });
+	}
+	function createTab(url) {	
+	  chrome.windows.getAll({"populate":true}, function(windows) {	  
+		var existing_tab = null;
+		for (var i in windows)
+		{
+		  var tabs = windows[i].tabs;
+		  for (var j in tabs)
+		  {
+			var tab = tabs[j];
+			if (tab.url == url) 
+			{
+			  existing_tab = tab;
+			  break;
+			}
+		  }
+		}
+		if (!existing_tab) {
+		   chrome.tabs.create({"url":url, "selected":false},function(newTabid){
+		    newWordTabId = newTabid.id;	
+			funcSendResponse({text:"1"});		   
+		   });
+		}
+	  });
+	}
+    </script>  
+  </head>
+  <body>	
+  </body>
+</html>
